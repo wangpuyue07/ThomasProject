@@ -25,12 +25,12 @@ const fieldLabels = {
   name: 'Your Name'
 };
 
-const DebtData = [];
+/*const DebtData = [];
 const InvestmentData = [];
 const SpendingData = [];
-const DecumulationData = [];
+const DecumulationData = [];*/
 
-/*const DebtData = [
+const DebtData = [
   {
     key: 1,
     loanAmount: 10000,
@@ -99,7 +99,7 @@ const DecumulationData = [
     duration: false,
     SDate: moment('2014-12', 'YYYY-MM')
   }
-];*/
+];
 
 @connect(({loading}) => ({
   submitting: loading.effects['form/submitAdvancedForm']
