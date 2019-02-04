@@ -20,6 +20,7 @@ import DecumulationForm from './DecumulationForm';
 import styles from './style.less';
 import moment from 'moment';
 
+
 const {Column, ColumnGroup} = Table;
 const fieldLabels = {
   name: 'Your Name'
@@ -350,7 +351,7 @@ class AdvancedForm extends PureComponent {
       });
       result.push(rItem);
     }
-    this.setState({result});
+    this.setState({result},()=>{document.documentElement.scrollTop = document.getElementById('headerInput').offsetHeight;});
   };
 
 
@@ -385,6 +386,7 @@ class AdvancedForm extends PureComponent {
         content="Generate your Form"
         wrapperClassName={styles.advancedForm}
       >
+      <div id={'headerInput'}>
         <Card title="User Note (not sure if there is any information we need to collect, so just hold this space"
               className={styles.card} bordered={false}>
           <Form layout="vertical" hideRequiredMark>
@@ -425,6 +427,7 @@ class AdvancedForm extends PureComponent {
             initialValue: DecumulationData
           })(<DecumulationForm/>)}
         </Card>
+        </div>
         {
           this.state.result && <Card title="Result"
                                      className={styles.card} bordered={false}
@@ -432,6 +435,8 @@ class AdvancedForm extends PureComponent {
             <Table dataSource={this.state.result} defaultExpandAllRows={true}
                    scroll={{x: (Object.keys(this.state.result[0]).length * 150) + 'px'}}
                    bordered
+                   pagination={{ pageSize: 999999 }}
+                   hideOnSinglePage={true}
             >
               {
                 Object.keys(this.state.result[0]).map(name => <Column
@@ -448,7 +453,7 @@ class AdvancedForm extends PureComponent {
         <FooterToolbar style={{width}}>
           {this.getErrorInfo()}
           <Button type="primary" onClick={this.validate} loading={submitting}>
-            Gnerate Form
+            Generate Form
           </Button>
         </FooterToolbar>
       </PageHeaderWrapper>
